@@ -364,11 +364,13 @@
 "Assets/Devion Games/Login System/Scripts/Runtime/UI/LoginWindow.cs"
 "Assets/Devion Games/Login System/Scripts/Runtime/UI/RecoverPasswordWindow.cs"
 "Assets/Devion Games/Login System/Scripts/Runtime/UI/RegistrationWindow.cs"
-"Assets/NewUser.cs"
-"Assets/Scenes/Login.cs"
-"Assets/Scenes/Main.cs"
-"Assets/Scenes/Register.cs"
-"Assets/Scenes/Web.cs"
+"Assets/Scripts/Login.cs"
+"Assets/Scripts/Main.cs"
+"Assets/Scripts/NewUser.cs"
+"Assets/Scripts/Register.cs"
+"Assets/Scripts/SimpleJSON.cs"
+"Assets/Scripts/UserInfo.cs"
+"Assets/Scripts/Web.cs"
 -langversion:9.0
 
 /deterministic
