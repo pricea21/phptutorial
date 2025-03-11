@@ -364,6 +364,8 @@
 "Assets/Devion Games/Login System/Scripts/Runtime/UI/LoginWindow.cs"
 "Assets/Devion Games/Login System/Scripts/Runtime/UI/RecoverPasswordWindow.cs"
 "Assets/Devion Games/Login System/Scripts/Runtime/UI/RegistrationWindow.cs"
+"Assets/Scripts/Item.cs"
+"Assets/Scripts/ItemManager.cs"
 "Assets/Scripts/Login.cs"
 "Assets/Scripts/Main.cs"
 "Assets/Scripts/NewUser.cs"
