@@ -8,7 +8,7 @@ public class Web : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(GetDate());
+       StartCoroutine(GetDate());
         //StartCoroutine(Login("testuser", "123456"));
         //StartCoroutine(RegisterUser("testuser3", "123456"));
     }
@@ -17,6 +17,7 @@ public class Web : MonoBehaviour
     {
         //StartCoroutine(GetItemsIDs(Main.Instance.UserInfo.UserID));
     }
+    /*
     IEnumerator GetDate()
     {
         using (UnityWebRequest www = UnityWebRequest.Get("http://phpunitybackendtutorial.hstn.me/GetDate.php"))
@@ -35,6 +36,40 @@ public class Web : MonoBehaviour
                 //or retrieve results as binary data
                 byte[] results = www.downloadHandler.data;
             }
+        }
+    }*/
+
+    IEnumerator GetDate()
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get("http://phpunitybackendtutorial.hstn.me/GetDate.php"))
+        {
+            // ---testing aeonfree
+            www.SetRequestHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
+            www.SetRequestHeader("Accept-Encoding", "gzip, deflate");
+            www.SetRequestHeader("Accept-Language", "en");
+            www.SetRequestHeader("Cache-Control", "max-age=0");
+            www.SetRequestHeader("Cookie", "__test=d4f16507ae75e677830d2f5a3f570eca");
+            www.SetRequestHeader("Upgrade-Insecure-Requests", "1");
+            www.SetRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36");
+            // ---testing aeonfree
+
+            // Request and wait for the desired page.
+            //yield return webRequest.SendWebRequest();
+            yield return www.Send();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log("www.error");
+            }
+            else
+            {
+                //Show results as text
+                Debug.Log(www.downloadHandler.text);
+
+                //or retrieve results as binary data
+                byte[] results = www.downloadHandler.data;
+            }
+
         }
     }
 
