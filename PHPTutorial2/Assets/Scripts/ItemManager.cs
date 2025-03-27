@@ -65,6 +65,12 @@ public class ItemManager : MonoBehaviour
             itemGo.transform.Find("Price").GetComponent<Text>().text = itemInfoJson["price"];
             itemGo.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"];
 
+            //Create a callback to get the SPRITE from Web.cs
+            Action<Sprite> getItemIconCallback = (downloadedSprite) => {
+
+                
+            };
+
             //Set sell button
             itemGo.transform.Find("SellButton").GetComponent<Button>().onClick.AddListener(() => {
                 string idInventory = id;

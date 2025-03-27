@@ -41,7 +41,7 @@ public class Web : MonoBehaviour
 
     IEnumerator GetDate()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("http://phpunitybackendtutorial.hstn.me/GetDate.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get("http://localhost/UnityBackendTutorial/GetDate.php"))
         {
             // ---testing aeonfree
             www.SetRequestHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7");
@@ -73,9 +73,36 @@ public class Web : MonoBehaviour
         }
     }
 
+    public IEnumerator GetItemIcon(string itemID, System.Action<Sprite> callback)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("itemID", itemID);
+
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/UnityBackendTutorial/GetItemIcon.php", form))
+        {
+            yield return www.Send();
+
+            //Check for errors
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log("www.error");
+            }
+            else
+            {
+                byte[] bytes = www.downloadHandler.data;
+
+                Texture2D texture = new Texture2D(2, 2);
+                texture.LoadImage(bytes);
+
+                Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                callback(sprite);
+            }
+        }
+    }
+
     IEnumerator GetUsers()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("http://phpunitybackendtutorial.hstn.me/GetUsers.php"))
+        using (UnityWebRequest www = UnityWebRequest.Get("http://localhost/UnityBackendTutorial/GetUsers.php"))
         {
             yield return www.Send();
 
@@ -100,7 +127,7 @@ public class Web : MonoBehaviour
         form.AddField("loginUser", username);
         form.AddField("loginPass", password);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://phpunitybackendtutorial.hstn.me/Login.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/UnityBackendTutorial/Login.php", form))
         {
             yield return www.SendWebRequest();
 
@@ -134,7 +161,7 @@ public class Web : MonoBehaviour
         form.AddField("loginUser", username);
         form.AddField("loginPass", password);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://phpunitybackendtutorial.hstn.me/RegisterUser.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/UnityBackendTutorial/RegisterUser.php", form))
         {
             yield return www.SendWebRequest();
 
@@ -154,7 +181,7 @@ public class Web : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("userID", userID);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://phpunitybackendtutorial.hstn.me/GetItemsID.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/UnityBackendTutorial/GetItemsID.php", form))
         {
             yield return www.Send();
 
@@ -179,7 +206,7 @@ public class Web : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("itemID", itemID);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://phpunitybackendtutorial.hstn.me/GetItem.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/UnityBackendTutorial/GetItem.php", form))
         {
             yield return www.Send();
 
@@ -206,7 +233,7 @@ public class Web : MonoBehaviour
         form.AddField("itemID", itemID);
         form.AddField("userID", userID);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://phpunitybackendtutorial.hstn.me/SellItem.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost/UnityBackendTutorial/SellItem.php", form))
         {
             yield return www.Send();
 
