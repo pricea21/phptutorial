@@ -67,9 +67,9 @@ public class ItemManager : MonoBehaviour
 
             //Create a callback to get the SPRITE from Web.cs
             Action<Sprite> getItemIconCallback = (downloadedSprite) => {
-
-                
+                itemGo.transform.Find("Image").GetComponent<Image>().sprite = downloadedSprite;
             };
+            StartCoroutine(Main.Instance.Web.GetItemIcon(itemId, getItemIconCallback));
 
             //Set sell button
             itemGo.transform.Find("SellButton").GetComponent<Button>().onClick.AddListener(() => {
