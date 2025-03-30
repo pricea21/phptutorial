@@ -65,7 +65,9 @@ public class ItemManager : MonoBehaviour
             itemGo.transform.Find("Price").GetComponent<Text>().text = itemInfoJson["price"];
             itemGo.transform.Find("Description").GetComponent<Text>().text = itemInfoJson["description"];
 
-            byte[] bytes = ImageManager.Instance.LoadImage(itemId);
+            int ImgVer = itemInfoJson["ImgVer"].AsInt;
+
+            byte[] bytes = ImageManager.Instance.LoadImage(itemId, ImgVer);
 
             if (bytes.Length == 0)
             {
@@ -73,7 +75,8 @@ public class ItemManager : MonoBehaviour
                 Action<byte[]> getItemIconCallback = (downloadbyte) => {
                     Sprite sprite = ImageManager.Instance.BytestoSprite(downloadbyte);
                     itemGo.transform.Find("Image").GetComponent<Image>().sprite = sprite;
-                    ImageManager.Instance.SaveImage(itemId, downloadbyte);
+                    ImageManager.Instance.SaveImage(itemId, downloadbyte, ImgVer);
+                    ImageManager.Instance.SaveVersionJSON();
                 };
                 StartCoroutine(Main.Instance.Web.GetItemIcon(itemId, getItemIconCallback));
             }
@@ -93,6 +96,5 @@ public class ItemManager : MonoBehaviour
             //continue to the next item
 
         }
-
     }
 }
